@@ -1,7 +1,8 @@
 import express from 'express';
+import config from './config/config';
 
 const app = express();
 
-app.listen(8080, () => {
-  console.log('Server listening on port 8080');
+app.listen(config.server.port, () => {
+  console.log(`Server listening on port ${config.server.port}`);
 });
