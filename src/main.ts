@@ -5,6 +5,8 @@ import todoRouter from './routes/Todo';
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/api', noteRouter);
 app.use('/api', todoRouter);
 
