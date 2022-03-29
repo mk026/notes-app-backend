@@ -1,10 +1,11 @@
 import { Router } from 'express';
+import NoteController from '../controllers/Note.controller';
 
 const router = Router();
 
-router.get('/notes', (req, res) => res.json({ message: 'GET Notes' }));
-router.post('/notes', (req, res) => res.json({ message: 'POST Notes' }));
-router.put('/notes', (req, res) => res.json({ message: 'PUT Notes' }));
-router.delete('/notes', (req, res) => res.json({ message: 'DELETE Notes' }));
+router.get('/notes', NoteController.getAll);
+router.post('/notes', NoteController.create);
+router.put('/notes', NoteController.update);
+router.delete('/notes', NoteController.delete);
 
 export default router;
