@@ -1,10 +1,11 @@
 import { Router } from 'express';
+import TodoController from '../controllers/Todo.controller';
 
 const router = Router();
 
-router.get('/todos', (req, res) => res.json({ message: 'GET todo' }));
-router.post('/todos', (req, res) => res.json({ message: 'POST todo' }));
-router.put('/todos', (req, res) => res.json({ message: 'PUT todo' }));
-router.delete('/todos', (req, res) => res.json({ message: 'DELETE todo' }));
+router.get('/todos', TodoController.getAll);
+router.post('/todos', TodoController.create);
+router.put('/todos', TodoController.update);
+router.delete('/todos', TodoController.delete);
 
 export default router;
