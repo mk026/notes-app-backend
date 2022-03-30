@@ -15,7 +15,7 @@ app.use('/api', noteRouter);
 app.use('/api', todoRouter);
 
 async function startApp() {
-  await mongoose.connect('mongodb://localhost:27017/notesappdb');
+  await mongoose.connect(config.mongodb.host);
   app.listen(config.server.port, () => {
     console.log(`Server listening on port ${config.server.port}`);
   });
