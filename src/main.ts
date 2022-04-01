@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import config from './config/config';
-import noteRouter from './routes/Note';
-import todoRouter from './routes/Todo';
+import noteRouter from './api/note/note.router';
+import todoRouter from './api/todo/todo.router';
 
 const app = express();
 
