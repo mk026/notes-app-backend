@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 
+import NoteService from './note.service';
+
 class NoteController {
   async getAll(req: Request, res: Response) {
-    return res.json({ message: 'Get all notes' });
+    const notes = await NoteService.getAll();
+    return res.json(notes);
   }
   async create(req: Request, res: Response) {
     return res.json({ message: 'Create new note' });

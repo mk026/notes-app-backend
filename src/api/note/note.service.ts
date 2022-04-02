@@ -1,5 +1,7 @@
 class NoteService {
-  getAll() {}
+  async getAll() {
+    return [];
+  }
 
   create() {}
 
