@@ -1,6 +1,9 @@
+import Note from './note.model';
+
 class NoteService {
   async getAll() {
-    return [];
+    const notes = await Note.find();
+    return notes;
   }
 
   create() {}
