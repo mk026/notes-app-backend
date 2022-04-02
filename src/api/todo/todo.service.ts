@@ -1,6 +1,9 @@
+import Todo from './todo.model';
+
 class TodoService {
   async getAll() {
-    return [];
+    const todos = await Todo.find();
+    return todos;
   }
 
   create() {}
