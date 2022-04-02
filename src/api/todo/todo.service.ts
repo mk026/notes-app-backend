@@ -1,5 +1,7 @@
 class TodoService {
-  getAll() {}
+  async getAll() {
+    return [];
+  }
 
   create() {}
 

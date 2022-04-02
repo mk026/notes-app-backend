@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 
+import TodoService from './todo.service';
+
 class TodoController {
   async getAll(req: Request, res: Response) {
-    return res.json({ message: 'Get all todos' });
+    const todos = await TodoService.getAll();
+    return res.json(todos);
   }
   async create(req: Request, res: Response) {
     return res.json({ message: 'Create new todo' });
