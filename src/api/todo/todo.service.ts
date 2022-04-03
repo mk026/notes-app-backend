@@ -19,7 +19,10 @@ class TodoService {
     return updatedTodo;
   }
 
-  delete() {}
+  async delete(id: ITodo['_id']) {
+    const deletedTodo = await Todo.findByIdAndDelete(id);
+    return deletedTodo;
+  }
 }
 
 export default new TodoService();

@@ -16,7 +16,8 @@ class TodoController {
     return res.json(todo);
   }
   async delete(req: Request, res: Response) {
-    return res.json({ message: 'Delete todo' });
+    const todo = await TodoService.delete(req.params.id);
+    return res.json(todo);
   }
 }
 
