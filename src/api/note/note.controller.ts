@@ -8,7 +8,8 @@ class NoteController {
     return res.json(notes);
   }
   async create(req: Request, res: Response) {
-    return res.json({ message: 'Create new note' });
+    const note = await NoteService.create(req.body);
+    return res.json(note);
   }
   async update(req: Request, res: Response) {
     return res.json({ message: 'Update note' });

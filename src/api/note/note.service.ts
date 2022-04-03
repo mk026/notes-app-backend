@@ -1,4 +1,5 @@
 import Note from './note.model';
+import INote from './note.interface';
 
 class NoteService {
   async getAll() {
@@ -6,7 +7,10 @@ class NoteService {
     return notes;
   }
 
-  create() {}
+  async create(note: INote) {
+    const newNote = await Note.create(note);
+    return newNote;
+  }
 
   update() {}
 
