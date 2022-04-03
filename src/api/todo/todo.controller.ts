@@ -4,20 +4,36 @@ import TodoService from './todo.service';
 
 class TodoController {
   async getAll(req: Request, res: Response) {
-    const todos = await TodoService.getAll();
-    return res.json(todos);
+    try {
+      const todos = await TodoService.getAll();
+      return res.json(todos);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
   async create(req: Request, res: Response) {
-    const todo = await TodoService.create(req.body);
-    return res.json(todo);
+    try {
+      const todo = await TodoService.create(req.body);
+      return res.json(todo);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
   async update(req: Request, res: Response) {
-    const todo = await TodoService.update(req.body);
-    return res.json(todo);
+    try {
+      const todo = await TodoService.update(req.body);
+      return res.json(todo);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
   async delete(req: Request, res: Response) {
-    const todo = await TodoService.delete(req.params.id);
-    return res.json(todo);
+    try {
+      const todo = await TodoService.delete(req.params.id);
+      return res.json(todo);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
 }
 
