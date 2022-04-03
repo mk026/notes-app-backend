@@ -8,7 +8,8 @@ class TodoController {
     return res.json(todos);
   }
   async create(req: Request, res: Response) {
-    return res.json({ message: 'Create new todo' });
+    const todo = await TodoService.create(req.body);
+    return res.json(todo);
   }
   async update(req: Request, res: Response) {
     return res.json({ message: 'Update todo' });

@@ -1,4 +1,5 @@
 import Todo from './todo.model';
+import ITodo from './todo.interface';
 
 class TodoService {
   async getAll() {
@@ -6,7 +7,10 @@ class TodoService {
     return todos;
   }
 
-  create() {}
+  async create(todo: ITodo) {
+    const newTodo = await Todo.create(todo);
+    return newTodo;
+  }
 
   update() {}
 
