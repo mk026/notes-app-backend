@@ -12,7 +12,8 @@ class NoteController {
     return res.json(note);
   }
   async update(req: Request, res: Response) {
-    return res.json({ message: 'Update note' });
+    const note = await NoteService.update(req.body);
+    return res.json(note);
   }
   async delete(req: Request, res: Response) {
     return res.json({ message: 'Delete note' });

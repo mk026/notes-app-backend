@@ -12,7 +12,12 @@ class NoteService {
     return newNote;
   }
 
-  update() {}
+  async update(note: INote) {
+    const updatedNote = await Note.findByIdAndUpdate(note._id, note, {
+      new: true,
+    });
+    return updatedNote;
+  }
 
   delete() {}
 }
