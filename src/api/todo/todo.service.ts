@@ -12,7 +12,12 @@ class TodoService {
     return newTodo;
   }
 
-  update() {}
+  async update(todo: ITodo) {
+    const updatedTodo = await Todo.findByIdAndUpdate(todo._id, todo, {
+      new: true,
+    });
+    return updatedTodo;
+  }
 
   delete() {}
 }

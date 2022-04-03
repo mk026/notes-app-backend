@@ -12,7 +12,8 @@ class TodoController {
     return res.json(todo);
   }
   async update(req: Request, res: Response) {
-    return res.json({ message: 'Update todo' });
+    const todo = await TodoService.update(req.body);
+    return res.json(todo);
   }
   async delete(req: Request, res: Response) {
     return res.json({ message: 'Delete todo' });
