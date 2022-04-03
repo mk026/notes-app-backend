@@ -19,7 +19,10 @@ class NoteService {
     return updatedNote;
   }
 
-  delete() {}
+  async delete(id: INote['_id']) {
+    const deletedNote = await Note.findByIdAndDelete(id);
+    return deletedNote;
+  }
 }
 
 export default new NoteService();

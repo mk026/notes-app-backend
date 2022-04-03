@@ -16,7 +16,8 @@ class NoteController {
     return res.json(note);
   }
   async delete(req: Request, res: Response) {
-    return res.json({ message: 'Delete note' });
+    const note = await NoteService.delete(req.params.id);
+    return res.json(note);
   }
 }
 
