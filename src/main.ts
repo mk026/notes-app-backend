@@ -5,6 +5,7 @@ import cors from 'cors';
 import config from './config/config';
 import noteRouter from './api/note/note.router';
 import todoRouter from './api/todo/todo.router';
+import userRouter from './api/user/user.router';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/api', noteRouter);
 app.use('/api', todoRouter);
+app.use('/api', userRouter);
 
 async function startApp() {
   try {
