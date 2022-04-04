@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
+import UserController from './user.controller';
+
 const router = Router();
 
-router.get('/users', (req, res) => res.json({ message: 'GET users' }));
-router.put('/users', (req, res) => res.json({ message: 'PUT users' }));
-router.delete('/users', (req, res) => res.json({ message: 'DELETE users' }));
+router.get('/users', UserController.getOne);
+router.put('/users', UserController.update);
+router.delete('/users', UserController.delete);
 
 export default router;
