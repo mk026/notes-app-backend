@@ -9,7 +9,8 @@ class UserController {
   }
 
   async update(req: Request, res: Response) {
-    return res.json({ message: 'Update user' });
+    const user = await UserService.update(req.body);
+    return res.json(user);
   }
 
   async delete(req: Request, res: Response) {

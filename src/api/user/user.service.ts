@@ -7,8 +7,11 @@ class UserService {
     return user;
   }
 
-  async update() {
-    return null;
+  async update(user: IUser) {
+    const updatedUser = await User.findByIdAndUpdate(user._id, user, {
+      new: true,
+    });
+    return updatedUser;
   }
 
   async delete() {
