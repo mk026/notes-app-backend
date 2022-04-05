@@ -14,8 +14,9 @@ class UserService {
     return updatedUser;
   }
 
-  async delete() {
-    return null;
+  async delete(id: IUser['_id']) {
+    const deletedUser = await User.findByIdAndDelete(id);
+    return deletedUser;
   }
 }
 
