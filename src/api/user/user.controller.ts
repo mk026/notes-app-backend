@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 
+import UserService from './user.service';
+
 class UserController {
   async getOne(req: Request, res: Response) {
-    return res.json({ message: 'Get user' });
+    const user = await UserService.getOne(req.params.id);
+    return res.json(user);
   }
 
   async update(req: Request, res: Response) {

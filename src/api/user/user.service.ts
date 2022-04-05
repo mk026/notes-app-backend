@@ -1,6 +1,10 @@
+import User from './user.model';
+import IUser from './user.interface';
+
 class UserService {
-  async getOne() {
-    return null;
+  async getOne(id: IUser['_id']) {
+    const user = await User.findById(id);
+    return user;
   }
 
   async update() {
