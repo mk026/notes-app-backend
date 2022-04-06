@@ -6,6 +6,6 @@ const router = Router();
 router.get('/todos', TodoController.getAll);
 router.post('/todos', TodoController.create);
 router.put('/todos', TodoController.update);
-router.delete('/todos', TodoController.delete);
+router.delete('/todos/:id', TodoController.delete);
 
 export default router;
