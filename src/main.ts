@@ -6,6 +6,7 @@ import config from './config/config';
 import noteRouter from './api/note/note.router';
 import todoRouter from './api/todo/todo.router';
 import userRouter from './api/user/user.router';
+import authRouter from './api/auth/auth.router';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api', noteRouter);
 app.use('/api', todoRouter);
 app.use('/api', userRouter);
+app.use('/api', authRouter);
 
 async function startApp() {
   try {
