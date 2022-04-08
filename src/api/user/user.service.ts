@@ -7,6 +7,11 @@ class UserService {
     return user;
   }
 
+  async create(user: IUser) {
+    const newUser = await User.create(user);
+    return newUser;
+  }
+
   async update(user: IUser) {
     const updatedUser = await User.findByIdAndUpdate(user._id, user, {
       new: true,
