@@ -1,10 +1,10 @@
 class AuthService {
-  async signup() {
-    return { message: 'Signup' };
+  async signup(user: { name: string; email: string; password: string }) {
+    return { message: `Signup ${user.name}` };
   }
 
-  async signin() {
-    return { message: 'Signin' };
+  async signin(user: { email: string; password: string }) {
+    return { message: `Signin ${user.email}` };
   }
 }
 
