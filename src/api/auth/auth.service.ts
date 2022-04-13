@@ -21,6 +21,9 @@ class AuthService {
       return { message: `User with email ${email} not found` };
     }
     const isValidPassword = bcrypt.compareSync(password, foundUser.password);
+    if (!isValidPassword) {
+      return { message: `Incorrect password` };
+    }
     return { message: `Successfuly signed in ${email}` };
   }
 }
