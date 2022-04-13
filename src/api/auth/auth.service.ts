@@ -11,7 +11,13 @@ class AuthService {
   }
 
   async signin(user: { email: string; password: string }) {
-    return { message: `Signin ${user.email}` };
+    const { email, password } = user;
+    const foundUser = await User.findOne({ email });
+    if (!foundUser) {
+      return { message: `User with email ${email} not found` };
+    }
+    const isValidPassword = bcrypt.compareSync(password, foundUser.password);
+    return { message: `Successfuly signed in ${email}` };
   }
 }
 
