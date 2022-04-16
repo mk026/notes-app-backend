@@ -2,9 +2,12 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import User from '../user/user.model';
+import config from '../../config/config';
 
 const generateToken = (payload: string | object) => {
-  return jwt.sign(payload, 'secret', { expiresIn: '24h' });
+  const secret = config.server.token.secret;
+  const expiresIn = config.server.token.expiresIn;
+  return jwt.sign(payload, secret, { expiresIn });
 };
 
 class AuthService {
