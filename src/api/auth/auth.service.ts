@@ -3,6 +3,10 @@ import jwt from 'jsonwebtoken';
 
 import User from '../user/user.model';
 
+const generateToken = (payload: string | object) => {
+  return jwt.sign(payload, 'secret', { expiresIn: '24h' });
+};
+
 class AuthService {
   async signup(user: { name: string; email: string; password: string }) {
     const { name, email, password } = user;
@@ -12,7 +16,7 @@ class AuthService {
     }
     const hashPassword = bcrypt.hashSync(password);
     const newUser = await User.create({ name, email, password: hashPassword });
-    const token = jwt.sign(newUser._id, 'secret', { expiresIn: '24h' });
+    const token = generateToken(newUser._id);
     return { message: `Successfuly signed up ${name}`, token };
   }
 
@@ -26,7 +30,7 @@ class AuthService {
     if (!isValidPassword) {
       return { message: `Incorrect password` };
     }
-    const token = jwt.sign(foundUser._id, 'secret', { expiresIn: '24h' });
+    const token = generateToken(foundUser._id);
     return { message: `Successfuly signed in ${email}`, token };
   }
 }
