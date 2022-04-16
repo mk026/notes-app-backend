@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 import User from '../user/user.model';
 
@@ -10,8 +11,9 @@ class AuthService {
       return { message: `User with email ${email} already exists` };
     }
     const hashPassword = bcrypt.hashSync(password);
-    await User.create({ name, email, password: hashPassword });
-    return { message: `Successfuly signed up ${name}` };
+    const newUser = await User.create({ name, email, password: hashPassword });
+    const token = jwt.sign(newUser._id, 'secret', { expiresIn: '24h' });
+    return { message: `Successfuly signed up ${name}`, token };
   }
 
   async signin(user: { email: string; password: string }) {
@@ -24,7 +26,8 @@ class AuthService {
     if (!isValidPassword) {
       return { message: `Incorrect password` };
     }
-    return { message: `Successfuly signed in ${email}` };
+    const token = jwt.sign(foundUser._id, 'secret', { expiresIn: '24h' });
+    return { message: `Successfuly signed in ${email}`, token };
   }
 }
 
