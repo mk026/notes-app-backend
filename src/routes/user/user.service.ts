@@ -7,6 +7,16 @@ class UserService {
     return user;
   }
 
+  async getOneByEmail(email: string) {
+    const user = await User.findOne({ email });
+    return user;
+  }
+
+  async create(user: { name: string; email: string; password: string }) {
+    const newUser = await User.create(user);
+    return newUser;
+  }
+
   async update(user: IUser) {
     const updatedUser = await User.findByIdAndUpdate(user._id, user, {
       new: true,

@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import User from '../user/user.model';
+import UserService from '../user/user.service';
 import config from '../../config/config';
 
 const generateToken = (payload: string | object) => {
@@ -13,19 +13,23 @@ const generateToken = (payload: string | object) => {
 class AuthService {
   async signup(user: { name: string; email: string; password: string }) {
     const { name, email, password } = user;
-    const foundUser = await User.findOne({ email });
+    const foundUser = await UserService.getOneByEmail(email);
     if (foundUser) {
       return { message: `User with email ${email} already exists` };
     }
     const hashPassword = bcrypt.hashSync(password);
-    const newUser = await User.create({ name, email, password: hashPassword });
+    const newUser = await UserService.create({
+      name,
+      email,
+      password: hashPassword,
+    });
     const token = generateToken(newUser._id);
     return { message: `Successfuly signed up ${name}`, token };
   }
 
   async signin(user: { email: string; password: string }) {
     const { email, password } = user;
-    const foundUser = await User.findOne({ email });
+    const foundUser = await UserService.getOneByEmail(email);
     if (!foundUser) {
       return { message: `User with email ${email} not found` };
     }
