@@ -3,10 +3,10 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import config from './config/config';
-import noteRouter from './api/note/note.router';
-import todoRouter from './api/todo/todo.router';
-import userRouter from './api/user/user.router';
-import authRouter from './api/auth/auth.router';
+import noteRouter from './routes/note/note.router';
+import todoRouter from './routes/todo/todo.router';
+import userRouter from './routes/user/user.router';
+import authRouter from './routes/auth/auth.router';
 
 const app = express();
 
