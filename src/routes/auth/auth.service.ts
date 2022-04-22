@@ -1,14 +1,7 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 import UserService from '../user/user.service';
-import config from '../../config/config';
-
-const generateToken = (payload: string | object) => {
-  const secret = config.server.token.secret;
-  const expiresIn = config.server.token.expiresIn;
-  return jwt.sign(payload, secret, { expiresIn });
-};
+import generateToken from '../../utils/generateToken';
 
 class AuthService {
   async signup(user: { name: string; email: string; password: string }) {
