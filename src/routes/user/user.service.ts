@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 import User from './user.model';
 import IUser from './user.interface';
 
@@ -26,6 +28,21 @@ class UserService {
     const updatedUser = await User.findByIdAndUpdate(user._id, user, {
       new: true,
     });
+    return updatedUser;
+  }
+
+  async updatePassword(id: string, oldPassword: string, newPassword: string) {
+    const user = await User.findById(id);
+    const isValidPassword = bcrypt.compareSync(user!.password, oldPassword);
+    if (!isValidPassword) {
+      throw new Error('Incorrect password');
+    }
+    const hashPassword = bcrypt.hashSync(newPassword);
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { password: hashPassword },
+      { new: true }
+    );
     return updatedUser;
   }
 
