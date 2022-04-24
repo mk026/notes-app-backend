@@ -12,11 +12,15 @@ class UserController {
     }
   }
 
-  async getAccountInfo(req: Request & { user?: string }, res: Response) {
+  async getAccountInfo(
+    req: Request & { user?: { id: string } },
+    res: Response
+  ) {
     try {
-      const userInfo = await UserService.getAccountInfo(req.user);
+      const userInfo = await UserService.getAccountInfo(req.user!.id);
       return res.json(userInfo);
     } catch (error) {
+      console.log(error);
       return res.status(500).json(error);
     }
   }
