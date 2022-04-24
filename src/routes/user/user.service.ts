@@ -7,6 +7,11 @@ class UserService {
     return user;
   }
 
+  async getAccountInfo(id: IUser['_id']) {
+    const userInfo = await User.findById(id).select('name email').exec();
+    return userInfo;
+  }
+
   async getOneByEmail(email: string) {
     const user = await User.findOne({ email });
     return user;

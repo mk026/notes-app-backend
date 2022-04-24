@@ -12,6 +12,15 @@ class UserController {
     }
   }
 
+  async getAccountInfo(req: Request & { user?: string }, res: Response) {
+    try {
+      const userInfo = await UserService.getAccountInfo(req.user);
+      return res.json(userInfo);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
   async update(req: Request, res: Response) {
     try {
       const user = await UserService.update(req.body);
