@@ -16,7 +16,7 @@ class AuthService {
       email,
       password: hashPassword,
     });
-    const token = generateToken(newUser._id);
+    const token = generateToken({ id: newUser._id });
     return { message: `Successfuly signed up ${name}`, token };
   }
 
@@ -30,7 +30,7 @@ class AuthService {
     if (!isValidPassword) {
       return { message: `Incorrect password` };
     }
-    const token = generateToken(foundUser._id);
+    const token = generateToken({ id: foundUser._id });
     return { message: `Successfuly signed in ${email}`, token };
   }
 }
