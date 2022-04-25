@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
+import IUser from './user.interface';
 
 import UserService from './user.service';
 
 class UserController {
-  async getOne(req: Request, res: Response) {
+  async getOne(req: Request<{ id: IUser['_id'] }>, res: Response) {
     try {
       const user = await UserService.getOne(req.params.id);
       return res.json(user);
@@ -13,7 +14,7 @@ class UserController {
   }
 
   async getAccountInfo(
-    req: Request & { user?: { id: string } },
+    req: Request & { user?: { id: IUser['_id'] } },
     res: Response
   ) {
     try {
@@ -34,7 +35,7 @@ class UserController {
     }
   }
 
-  async delete(req: Request, res: Response) {
+  async delete(req: Request<{ id: IUser['_id'] }>, res: Response) {
     try {
       const user = await UserService.delete(req.params.id);
       return res.json(user);

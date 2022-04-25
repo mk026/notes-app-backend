@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import INote from './note.interface';
 import NoteService from './note.service';
 
 class NoteController {
@@ -27,7 +28,7 @@ class NoteController {
       return res.status(500).json(error);
     }
   }
-  async delete(req: Request, res: Response) {
+  async delete(req: Request<{ id: INote['_id'] }>, res: Response) {
     try {
       const note = await NoteService.delete(req.params.id);
       return res.json(note);

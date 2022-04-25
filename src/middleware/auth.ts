@@ -3,8 +3,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import config from '../config/config';
 
-export default function authMiddleware(
-  req: Request & { user?: string | JwtPayload },
+export default function authMiddleware<T>(
+  req: Request<T> & { user?: string | JwtPayload },
   res: Response,
   next: NextFunction
 ) {

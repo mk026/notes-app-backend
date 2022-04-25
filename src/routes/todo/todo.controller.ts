@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import ITodo from './todo.interface';
 
 import TodoService from './todo.service';
 
@@ -27,7 +28,7 @@ class TodoController {
       return res.status(500).json(error);
     }
   }
-  async delete(req: Request, res: Response) {
+  async delete(req: Request<{ id: ITodo['_id'] }>, res: Response) {
     try {
       const todo = await TodoService.delete(req.params.id);
       return res.json(todo);
