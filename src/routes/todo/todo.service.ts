@@ -2,8 +2,8 @@ import Todo from './todo.model';
 import ITodo from './todo.interface';
 
 class TodoService {
-  async getAll() {
-    const todos = await Todo.find();
+  async getAll(userId: ITodo['userId']) {
+    const todos = await Todo.find({ userId });
     return todos;
   }
 

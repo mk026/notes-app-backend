@@ -5,9 +5,9 @@ import INote from './note.interface';
 import NoteService from './note.service';
 
 class NoteController {
-  async getAll(req: Request, res: Response) {
+  async getAll(req: Request & { user?: { id: IUser['_id'] } }, res: Response) {
     try {
-      const notes = await NoteService.getAll();
+      const notes = await NoteService.getAll(req.user!.id);
       return res.json(notes);
     } catch (error) {
       return res.status(500).json(error);

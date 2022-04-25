@@ -5,9 +5,9 @@ import ITodo from './todo.interface';
 import TodoService from './todo.service';
 
 class TodoController {
-  async getAll(req: Request, res: Response) {
+  async getAll(req: Request & { user?: { id: IUser['_id'] } }, res: Response) {
     try {
-      const todos = await TodoService.getAll();
+      const todos = await TodoService.getAll(req.user!.id);
       return res.json(todos);
     } catch (error) {
       return res.status(500).json(error);

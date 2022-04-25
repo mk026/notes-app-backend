@@ -2,8 +2,8 @@ import Note from './note.model';
 import INote from './note.interface';
 
 class NoteService {
-  async getAll() {
-    const notes = await Note.find();
+  async getAll(userId: INote['userId']) {
+    const notes = await Note.find({ userId });
     return notes;
   }
 
