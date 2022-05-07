@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 
 import UserService from '../user/user.service';
 import generateToken from '../../utils/generateToken';
+import IUser from '../user/user.interface';
 
 class AuthService {
   async signup(user: { name: string; email: string; password: string }) {
@@ -32,6 +33,15 @@ class AuthService {
     }
     const token = generateToken({ id: foundUser._id });
     return { message: `Successfuly signed in ${email}`, token };
+  }
+
+  async check(id: IUser['_id']) {
+    const foundUser = await UserService.getOne(id);
+    if (!foundUser) {
+      return { message: `User not found` };
+    }
+    const token = generateToken({ id: foundUser._id });
+    return { message: `Successfuly generated new token`, token };
   }
 }
 
