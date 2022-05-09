@@ -18,7 +18,8 @@ class AuthService {
       password: hashPassword,
     });
     const token = generateToken({ id: newUser._id });
-    return { message: `Successfuly signed up ${name}`, token };
+    const userData = { name: newUser.name, email: newUser.email };
+    return { message: `Successfuly signed up ${name}`, user: userData, token };
   }
 
   async signin(user: { email: string; password: string }) {
@@ -32,7 +33,8 @@ class AuthService {
       return { message: `Incorrect password` };
     }
     const token = generateToken({ id: foundUser._id });
-    return { message: `Successfuly signed in ${email}`, token };
+    const userData = { name: foundUser.name, email: foundUser.email };
+    return { message: `Successfuly signed in ${email}`, user: userData, token };
   }
 
   async check(id: IUser['_id']) {
@@ -41,7 +43,12 @@ class AuthService {
       return { message: `User not found` };
     }
     const token = generateToken({ id: foundUser._id });
-    return { message: `Successfuly generated new token`, token };
+    const userData = { name: foundUser.name, email: foundUser.email };
+    return {
+      message: `Successfuly generated new token`,
+      user: userData,
+      token,
+    };
   }
 }
 
