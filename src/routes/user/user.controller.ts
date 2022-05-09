@@ -26,9 +26,9 @@ class UserController {
     }
   }
 
-  async update(req: Request, res: Response) {
+  async update(req: Request & { user?: { id: IUser['_id'] } }, res: Response) {
     try {
-      const user = await UserService.update(req.body);
+      const user = await UserService.update(req.user!.id, req.body);
       return res.json(user);
     } catch (error) {
       return res.status(500).json(error);
