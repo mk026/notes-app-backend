@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import UserService from '../user/user.service';
 import generateToken from '../../utils/generateToken';
 import IUser from '../user/user.interface';
-import CreateUserDto from './dto/create-user.dto';
+import CreateUserDto from '../user/dto/create-user.dto';
 import SigninUserDto from './dto/signin-user.dto';
 
 class AuthService {

@@ -2,6 +2,8 @@ import bcrypt from 'bcryptjs';
 
 import User from './user.model';
 import IUser from './user.interface';
+import CreateUserDto from './dto/create-user.dto';
+import UpdateUserDto from './dto/update-user.dto';
 
 class UserService {
   async getOne(id: IUser['_id']) {
@@ -19,13 +21,13 @@ class UserService {
     return user;
   }
 
-  async create(user: { name: string; email: string; password: string }) {
-    const newUser = await User.create(user);
+  async create(dto: CreateUserDto) {
+    const newUser = await User.create(dto);
     return newUser;
   }
 
-  async update(id: IUser['_id'], user: IUser) {
-    const updatedUser = await User.findByIdAndUpdate(id, user, {
+  async update(id: IUser['_id'], dto: UpdateUserDto) {
+    const updatedUser = await User.findByIdAndUpdate(id, dto, {
       new: true,
     });
     return updatedUser;
