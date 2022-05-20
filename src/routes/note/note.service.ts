@@ -1,5 +1,7 @@
 import Note from './note.model';
 import INote from './note.interface';
+import CreateNoteDto from './dto/create-note.dto';
+import UpdateNoteDto from './dto/update-note.dto';
 
 class NoteService {
   async getAll(userId: INote['userId']) {
@@ -7,13 +9,13 @@ class NoteService {
     return notes;
   }
 
-  async create(note: INote) {
-    const newNote = await Note.create(note);
+  async create(dto: CreateNoteDto) {
+    const newNote = await Note.create(dto);
     return newNote;
   }
 
-  async update(note: INote) {
-    const updatedNote = await Note.findByIdAndUpdate(note._id, note, {
+  async update(dto: UpdateNoteDto) {
+    const updatedNote = await Note.findByIdAndUpdate(dto._id, dto, {
       new: true,
     });
     return updatedNote;
