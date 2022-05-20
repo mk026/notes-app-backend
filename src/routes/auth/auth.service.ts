@@ -3,10 +3,12 @@ import bcrypt from 'bcryptjs';
 import UserService from '../user/user.service';
 import generateToken from '../../utils/generateToken';
 import IUser from '../user/user.interface';
+import CreateUserDto from './dto/create-user.dto';
+import SigninUserDto from './dto/signin-user.dto';
 
 class AuthService {
-  async signup(user: { name: string; email: string; password: string }) {
-    const { name, email, password } = user;
+  async signup(dto: CreateUserDto) {
+    const { name, email, password } = dto;
     const foundUser = await UserService.getOneByEmail(email);
     if (foundUser) {
       return { message: `User with email ${email} already exists` };
@@ -22,8 +24,8 @@ class AuthService {
     return { message: `Successfuly signed up ${name}`, user: userData, token };
   }
 
-  async signin(user: { email: string; password: string }) {
-    const { email, password } = user;
+  async signin(dto: SigninUserDto) {
+    const { email, password } = dto;
     const foundUser = await UserService.getOneByEmail(email);
     if (!foundUser) {
       return { message: `User with email ${email} not found` };
