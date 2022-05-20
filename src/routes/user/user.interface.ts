@@ -1,7 +1,6 @@
-import { ObjectId } from 'mongoose';
+import { Document } from 'mongoose';
 
-export default interface IUser {
-  _id: ObjectId;
+export default interface IUser extends Document {
   name: string;
   email: string;
   password: string;

@@ -1,7 +1,6 @@
-import { ObjectId } from 'mongoose';
+import { ObjectId, Document } from 'mongoose';
 
-export default interface INote {
-  _id: ObjectId;
+export default interface INote extends Document {
   userId: ObjectId;
   title: string;
   content: string;
