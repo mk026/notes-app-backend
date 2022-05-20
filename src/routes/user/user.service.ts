@@ -27,6 +27,14 @@ class UserService {
   }
 
   async update(id: ObjectId, dto: UpdateUserDto) {
+    if (dto.oldPassword && dto.newPassword) {
+      const updatedUser = await this.updatePassword(
+        id,
+        dto.oldPassword,
+        dto.newPassword
+      );
+      return updatedUser;
+    }
     const updatedUser = await User.findByIdAndUpdate(id, dto, {
       new: true,
     });
