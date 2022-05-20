@@ -1,5 +1,7 @@
 import Todo from './todo.model';
 import ITodo from './todo.interface';
+import CreateTodoDto from './dto/create-todo.dto';
+import UpdateTodoDto from './dto/update-todo.dto';
 
 class TodoService {
   async getAll(userId: ITodo['userId']) {
@@ -7,13 +9,13 @@ class TodoService {
     return todos;
   }
 
-  async create(todo: ITodo) {
-    const newTodo = await Todo.create(todo);
+  async create(dto: CreateTodoDto) {
+    const newTodo = await Todo.create(dto);
     return newTodo;
   }
 
-  async update(todo: ITodo) {
-    const updatedTodo = await Todo.findByIdAndUpdate(todo._id, todo, {
+  async update(dto: UpdateTodoDto) {
+    const updatedTodo = await Todo.findByIdAndUpdate(dto._id, dto, {
       new: true,
     });
     return updatedTodo;
