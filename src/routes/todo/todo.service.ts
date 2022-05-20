@@ -1,10 +1,11 @@
+import { ObjectId } from 'mongoose';
+
 import Todo from './todo.model';
-import ITodo from './todo.interface';
 import CreateTodoDto from './dto/create-todo.dto';
 import UpdateTodoDto from './dto/update-todo.dto';
 
 class TodoService {
-  async getAll(userId: ITodo['userId']) {
+  async getAll(userId: ObjectId) {
     const todos = await Todo.find({ userId });
     return todos;
   }
@@ -21,7 +22,7 @@ class TodoService {
     return updatedTodo;
   }
 
-  async delete(id: ITodo['_id']) {
+  async delete(id: ObjectId) {
     const deletedTodo = await Todo.findByIdAndDelete(id);
     return deletedTodo;
   }

@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { ObjectId } from 'mongoose';
 
 import UserService from '../user/user.service';
 import generateToken from '../../utils/generateToken';
@@ -39,7 +40,7 @@ class AuthService {
     return { message: `Successfuly signed in ${email}`, user: userData, token };
   }
 
-  async check(id: IUser['_id']) {
+  async check(id: ObjectId) {
     const foundUser = await UserService.getOne(id);
     if (!foundUser) {
       return { message: `User not found` };

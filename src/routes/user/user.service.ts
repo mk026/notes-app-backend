@@ -1,17 +1,17 @@
 import bcrypt from 'bcryptjs';
+import { ObjectId } from 'mongoose';
 
 import User from './user.model';
-import IUser from './user.interface';
 import CreateUserDto from './dto/create-user.dto';
 import UpdateUserDto from './dto/update-user.dto';
 
 class UserService {
-  async getOne(id: IUser['_id']) {
+  async getOne(id: ObjectId) {
     const user = await User.findById(id);
     return user;
   }
 
-  async getAccountInfo(id: IUser['_id']) {
+  async getAccountInfo(id: ObjectId) {
     const userInfo = await User.findById(id).select('name email').exec();
     return userInfo;
   }
@@ -26,14 +26,14 @@ class UserService {
     return newUser;
   }
 
-  async update(id: IUser['_id'], dto: UpdateUserDto) {
+  async update(id: ObjectId, dto: UpdateUserDto) {
     const updatedUser = await User.findByIdAndUpdate(id, dto, {
       new: true,
     });
     return updatedUser;
   }
 
-  async updatePassword(id: string, oldPassword: string, newPassword: string) {
+  async updatePassword(id: ObjectId, oldPassword: string, newPassword: string) {
     const user = await User.findById(id);
     const isValidPassword = bcrypt.compareSync(user!.password, oldPassword);
     if (!isValidPassword) {
@@ -48,7 +48,7 @@ class UserService {
     return updatedUser;
   }
 
-  async delete(id: IUser['_id']) {
+  async delete(id: ObjectId) {
     const deletedUser = await User.findByIdAndDelete(id);
     return deletedUser;
   }

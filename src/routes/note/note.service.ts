@@ -1,10 +1,11 @@
+import { ObjectId } from 'mongoose';
+
 import Note from './note.model';
-import INote from './note.interface';
 import CreateNoteDto from './dto/create-note.dto';
 import UpdateNoteDto from './dto/update-note.dto';
 
 class NoteService {
-  async getAll(userId: INote['userId']) {
+  async getAll(userId: ObjectId) {
     const notes = await Note.find({ userId });
     return notes;
   }
@@ -21,7 +22,7 @@ class NoteService {
     return updatedNote;
   }
 
-  async delete(id: INote['_id']) {
+  async delete(id: ObjectId) {
     const deletedNote = await Note.findByIdAndDelete(id);
     return deletedNote;
   }
