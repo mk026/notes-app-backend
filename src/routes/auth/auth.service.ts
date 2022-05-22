@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { ObjectId } from 'mongoose';
 
-import UserService from '../user/user.service';
+import userService from '../user/user.service';
 import generateToken from '../../utils/generateToken';
 import CreateUserDto from '../user/dto/create-user.dto';
 import SigninUserDto from './dto/signin-user.dto';
@@ -10,12 +10,12 @@ import ApiError from '../../exceptions/ApiError';
 class AuthService {
   async signup(dto: CreateUserDto) {
     const { name, email, password } = dto;
-    const foundUser = await UserService.getOneByEmail(email);
+    const foundUser = await userService.getOneByEmail(email);
     if (foundUser) {
       throw ApiError.BadRequest(`User with email ${email} already exists`);
     }
     const hashPassword = bcrypt.hashSync(password);
-    const newUser = await UserService.create({
+    const newUser = await userService.create({
       name,
       email,
       password: hashPassword,
@@ -27,7 +27,7 @@ class AuthService {
 
   async signin(dto: SigninUserDto) {
     const { email, password } = dto;
-    const foundUser = await UserService.getOneByEmail(email);
+    const foundUser = await userService.getOneByEmail(email);
     if (!foundUser) {
       throw ApiError.BadRequest(`User with email ${email} not found`);
     }
@@ -41,7 +41,7 @@ class AuthService {
   }
 
   async check(id: ObjectId) {
-    const foundUser = await UserService.getOne(id);
+    const foundUser = await userService.getOne(id);
     if (!foundUser) {
       throw ApiError.BadRequest('User not found');
     }

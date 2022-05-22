@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import NoteController from './note.controller';
-import authMiddleware from '../../middleware/auth';
+import authMiddleware from '../../middleware/auth.middleware';
 
 const router = Router();
 

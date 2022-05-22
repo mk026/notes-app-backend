@@ -7,7 +7,7 @@ import noteRouter from './routes/note/note.router';
 import todoRouter from './routes/todo/todo.router';
 import userRouter from './routes/user/user.router';
 import authRouter from './routes/auth/auth.router';
-import errorMiddleware from './middleware/error';
+import errorMiddleware from './middleware/error.middleware';
 
 const app = express();
 

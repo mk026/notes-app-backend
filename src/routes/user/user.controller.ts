@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import IUser from './user.interface';
 
-import UserService from './user.service';
+import IUser from './user.interface';
+import userService from './user.service';
 
 class UserController {
   async getOne(req: Request<{ id: IUser['_id'] }>, res: Response) {
     try {
-      const user = await UserService.getOne(req.params.id);
+      const user = await userService.getOne(req.params.id);
       return res.json(user);
     } catch (error) {
       return res.status(500).json(error);
@@ -18,7 +18,7 @@ class UserController {
     res: Response
   ) {
     try {
-      const userInfo = await UserService.getAccountInfo(req.user!.id);
+      const userInfo = await userService.getAccountInfo(req.user!.id);
       return res.json(userInfo);
     } catch (error) {
       console.log(error);
@@ -28,7 +28,7 @@ class UserController {
 
   async update(req: Request & { user?: { id: IUser['_id'] } }, res: Response) {
     try {
-      const user = await UserService.update(req.user!.id, req.body);
+      const user = await userService.update(req.user!.id, req.body);
       return res.json(user);
     } catch (error) {
       return res.status(500).json(error);
@@ -37,7 +37,7 @@ class UserController {
 
   async delete(req: Request<{ id: IUser['_id'] }>, res: Response) {
     try {
-      const user = await UserService.delete(req.params.id);
+      const user = await userService.delete(req.params.id);
       return res.json(user);
     } catch (error) {
       return res.status(500).json(error);

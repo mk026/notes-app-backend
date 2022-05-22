@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 
 import IUser from '../user/user.interface';
-import AuthService from './auth.service';
+import authService from './auth.service';
 
 class AuthController {
   async signup(req: Request, res: Response, next: NextFunction) {
     try {
-      const msg = await AuthService.signup(req.body);
+      const msg = await authService.signup(req.body);
       return res.json(msg);
     } catch (error) {
       next(error);
@@ -15,7 +15,7 @@ class AuthController {
 
   async signin(req: Request, res: Response, next: NextFunction) {
     try {
-      const msg = await AuthService.signin(req.body);
+      const msg = await authService.signin(req.body);
       return res.json(msg);
     } catch (error) {
       next(error);
@@ -28,7 +28,7 @@ class AuthController {
     next: NextFunction
   ) {
     try {
-      const msg = await AuthService.check(req.user!.id);
+      const msg = await authService.check(req.user!.id);
       return res.json(msg);
     } catch (error) {
       next(error);

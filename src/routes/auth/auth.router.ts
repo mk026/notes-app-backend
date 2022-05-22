@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import AuthController from './auth.controller';
-import authMiddleware from '../../middleware/auth';
+import authController from './auth.controller';
+import authMiddleware from '../../middleware/auth.middleware';
 
 const router = Router();
 
-router.post('/signup', AuthController.signup);
-router.post('/signin', AuthController.signin);
-router.get('/check', authMiddleware, AuthController.check);
+router.post('/signup', authController.signup);
+router.post('/signin', authController.signin);
+router.get('/check', authMiddleware, authController.check);
 
 export default router;
