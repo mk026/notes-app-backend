@@ -4,6 +4,7 @@ import { ObjectId } from 'mongoose';
 import User from './user.model';
 import CreateUserDto from './dto/create-user.dto';
 import UpdateUserDto from './dto/update-user.dto';
+import ApiError from '../../exceptions/ApiError';
 
 class UserService {
   async getOne(id: ObjectId) {
@@ -45,7 +46,7 @@ class UserService {
     const user = await User.findById(id);
     const isValidPassword = bcrypt.compareSync(user!.password, oldPassword);
     if (!isValidPassword) {
-      throw new Error('Incorrect password');
+      throw ApiError.BadRequest('Incorrect password');
     }
     const hashPassword = bcrypt.hashSync(newPassword);
     const updatedUser = await User.findByIdAndUpdate(
