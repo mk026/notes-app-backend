@@ -7,6 +7,7 @@ import noteRouter from './routes/note/note.router';
 import todoRouter from './routes/todo/todo.router';
 import userRouter from './routes/user/user.router';
 import authRouter from './routes/auth/auth.router';
+import errorMiddleware from './middleware/error';
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use('/api', noteRouter);
 app.use('/api', todoRouter);
 app.use('/api', userRouter);
 app.use('/api', authRouter);
+
+app.use(errorMiddleware);
 
 async function startApp() {
   try {
