@@ -1,8 +1,6 @@
 export default class UpdateUserDto {
-  constructor(
-    public readonly name?: string,
-    public readonly email?: string,
-    public readonly oldPassword?: string,
-    public readonly newPassword?: string
-  ) {}
+  readonly name?: string;
+  readonly email?: string;
+  readonly oldPassword?: string;
+  readonly newPassword?: string;
 }
