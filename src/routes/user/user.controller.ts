@@ -17,20 +17,6 @@ class UserController {
     }
   }
 
-  async getAccountInfo(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
-    try {
-      const userInfo = await userService.getAccountInfo(req.user!.id);
-      return res.json(userInfo);
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  }
-
   async update(
     req: Request & { user?: { id: IUser['_id'] } },
     res: Response,
