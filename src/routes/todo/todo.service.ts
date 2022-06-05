@@ -11,7 +11,7 @@ class TodoService {
   }
 
   async create(dto: CreateTodoDto) {
-    const newTodo = await Todo.create(dto);
+    const newTodo = await Todo.create({ ...dto, completed: false });
     return newTodo;
   }
 
