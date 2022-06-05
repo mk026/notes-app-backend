@@ -1,7 +1,11 @@
-const SERVER_PORT = 8080;
-const MONGODB_HOST = 'mongodb://localhost:27017/notesappdb';
-const TOKEN_SECRET = 'secret';
-const TOKEN_EXPIRESIN = '24h';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const SERVER_PORT = +process.env.SERVER_PORT!;
+const MONGODB_HOST = process.env.MONGODB_HOST!;
+const TOKEN_SECRET = process.env.TOKEN_SECRET!;
+const TOKEN_EXPIRESIN = process.env.TOKEN_EXPIRESIN!;
 
 const config = {
   server: {
