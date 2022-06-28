@@ -29,11 +29,11 @@ class AuthService {
     const { email, password } = dto;
     const foundUser = await userService.getOneByEmail(email);
     if (!foundUser) {
-      throw ApiError.BadRequest(`User with email ${email} not found`);
+      throw ApiError.BadRequest(`Incorrect email or password`);
     }
     const isValidPassword = bcrypt.compareSync(password, foundUser.password);
     if (!isValidPassword) {
-      throw ApiError.BadRequest('Incorrect password');
+      throw ApiError.BadRequest('Incorrect email or password');
     }
     const token = generateToken({ id: foundUser._id });
     const userData = { name: foundUser.name, email: foundUser.email };
