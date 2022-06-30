@@ -31,8 +31,10 @@ const config = {
     },
     validation: {
       todo: {
-        minLength: TODO_TITLE_MIN_LENGTH,
-        maxLength: TODO_TITLE_MAX_LENGTH,
+        title: {
+          minLength: TODO_TITLE_MIN_LENGTH,
+          maxLength: TODO_TITLE_MAX_LENGTH,
+        },
       },
       note: {
         title: {
