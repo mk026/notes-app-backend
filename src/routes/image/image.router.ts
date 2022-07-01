@@ -1,23 +1,16 @@
 import { Router } from 'express';
 
+import imageController from './image.controller';
 import authMiddleware from '../../middleware/auth.middleware';
 
 const router = Router();
 
-router.get('/images', authMiddleware, (req, res) =>
-  res.json({ message: 'All images' })
-);
+router.get('/images', authMiddleware, imageController.getAll);
 
-router.post('/images', authMiddleware, (req, res) =>
-  res.json({ message: 'Add image' })
-);
+router.post('/images', authMiddleware, imageController.create);
 
-router.put('/images', authMiddleware, (req, res) =>
-  res.json({ message: 'Update image info' })
-);
+router.put('/images', authMiddleware, imageController.update);
 
-router.delete('/images/:id', authMiddleware, (req, res) =>
-  res.json({ message: 'Delete image' })
-);
+router.delete('/images/:id', authMiddleware, imageController.delete);
 
 export default router;
