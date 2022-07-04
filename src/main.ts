@@ -7,6 +7,7 @@ import noteRouter from './routes/note/note.router';
 import todoRouter from './routes/todo/todo.router';
 import userRouter from './routes/user/user.router';
 import authRouter from './routes/auth/auth.router';
+import imageRouter from './routes/image/image.router';
 import errorMiddleware from './middleware/error.middleware';
 
 const app = express();
@@ -18,6 +19,7 @@ app.use('/api', noteRouter);
 app.use('/api', todoRouter);
 app.use('/api', userRouter);
 app.use('/api', authRouter);
+app.use('/api', imageRouter);
 
 app.use(errorMiddleware);
 
