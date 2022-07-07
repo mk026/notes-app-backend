@@ -17,6 +17,11 @@ const NOTE_TITLE_MAX_LENGTH = 100;
 const NOTE_CONTENT_MIN_LENGTH = 1;
 const NOTE_CONTENT_MAX_LENGTH = 1000;
 
+const IMAGE_TITLE_MIN_LENGTH = 1;
+const IMAGE_TITLE_MAX_LENGTH = 100;
+const IMAGE_DESCRIPTION_MIN_LENGTH = 1;
+const IMAGE_DESCRIPTION_MAX_LENGTH = 1000;
+
 const USER_NAME_MIN_LENGTH = 1;
 const USER_NAME_MAX_LENGTH = 100;
 const USER_PASSWORD_MIN_LENGTH = 6;
@@ -44,6 +49,16 @@ const config = {
         content: {
           minLength: NOTE_CONTENT_MIN_LENGTH,
           maxLength: NOTE_CONTENT_MAX_LENGTH,
+        },
+      },
+      image: {
+        title: {
+          minLength: IMAGE_TITLE_MIN_LENGTH,
+          maxLength: IMAGE_TITLE_MAX_LENGTH,
+        },
+        description: {
+          minLength: IMAGE_DESCRIPTION_MIN_LENGTH,
+          maxLength: IMAGE_DESCRIPTION_MAX_LENGTH,
         },
       },
       user: {
