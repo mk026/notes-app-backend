@@ -1,9 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
+import { ObjectId } from 'mongoose';
+
+import imageService from './image.service';
 
 class ImageController {
-  async getAll(req: Request, res: Response, next: NextFunction) {
+  async getAll(
+    req: Request & { user?: { id: ObjectId } },
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      return res.json({ message: 'All images' });
+      const images = await imageService.getAll(req.user!.id);
+      return res.json(images);
     } catch (error) {
       next(error);
     }
