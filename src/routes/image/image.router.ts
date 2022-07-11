@@ -12,10 +12,10 @@ router.get('/images', authMiddleware, imageController.getAll);
 
 router.post(
   '/images',
+  upload.single('image'),
   createImageValidator,
   validationMiddleware,
   authMiddleware,
-  upload.single('image'),
   imageController.create
 );
 
