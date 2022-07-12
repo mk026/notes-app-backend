@@ -10,16 +10,16 @@ const router = Router();
 router.get('/todos', authMiddleware, todoController.getAll);
 router.post(
   '/todos',
+  authMiddleware,
   createTodoValidator,
   validationMiddleware,
-  authMiddleware,
   todoController.create
 );
 router.put(
   '/todos',
+  authMiddleware,
   updateTodoValidator,
   validationMiddleware,
-  authMiddleware,
   todoController.update
 );
 router.delete('/todos/:id', authMiddleware, todoController.delete);

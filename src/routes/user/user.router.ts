@@ -9,9 +9,9 @@ const router = Router();
 
 router.put(
   '/users',
+  authMiddleware,
   updateUserValidator,
   validationMiddleware,
-  authMiddleware,
   userController.update
 );
 router.delete('/users/:id', authMiddleware, userController.delete);

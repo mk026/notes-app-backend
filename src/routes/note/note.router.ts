@@ -10,16 +10,16 @@ const router = Router();
 router.get('/notes', authMiddleware, NoteController.getAll);
 router.post(
   '/notes',
+  authMiddleware,
   createNoteValidator,
   validationMiddleware,
-  authMiddleware,
   NoteController.create
 );
 router.put(
   '/notes',
+  authMiddleware,
   updateNoteValidator,
   validationMiddleware,
-  authMiddleware,
   NoteController.update
 );
 router.delete('/notes/:id', authMiddleware, NoteController.delete);

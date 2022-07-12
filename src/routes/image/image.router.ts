@@ -12,18 +12,18 @@ router.get('/images', authMiddleware, imageController.getAll);
 
 router.post(
   '/images',
+  authMiddleware,
   upload.single('image'),
   createImageValidator,
   validationMiddleware,
-  authMiddleware,
   imageController.create
 );
 
 router.put(
   '/images',
+  authMiddleware,
   updateImageValidator,
   validationMiddleware,
-  authMiddleware,
   imageController.update
 );
 
