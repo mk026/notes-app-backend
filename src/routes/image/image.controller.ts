@@ -17,9 +17,20 @@ class ImageController {
     }
   }
 
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(
+    req: Request & { user?: { id: ObjectId } },
+    res: Response,
+    next: NextFunction
+  ) {
     try {
-      return res.json({ message: 'Add image' });
+      const imageUrl = `/static/images/${req.user?.id}/${req.file?.originalname}`;
+      const imageData = {
+        ...req.body,
+        userId: req.user?.id,
+        url: imageUrl,
+      };
+      const image = await imageService.create(imageData);
+      return res.json(image);
     } catch (error) {
       next(error);
     }
