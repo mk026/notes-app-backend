@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongoose';
 import CreateImageDto from './dto/create-image.dto';
+import UpdateImageDto from './dto/update-image.dto';
 
 import Image from './image.model';
 
@@ -14,7 +15,12 @@ class ImageService {
     return newImage;
   }
 
-  async update() {}
+  async update(dto: UpdateImageDto) {
+    const updatedImage = await Image.findByIdAndUpdate(dto._id, dto, {
+      new: true,
+    });
+    return updatedImage;
+  }
 
   async delete() {}
 }

@@ -38,7 +38,8 @@ class ImageController {
 
   async update(req: Request, res: Response, next: NextFunction) {
     try {
-      return res.json({ message: 'Update image info' });
+      const image = await imageService.update(req.body);
+      return res.json(image);
     } catch (error) {
       next(error);
     }
