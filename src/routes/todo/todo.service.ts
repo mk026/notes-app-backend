@@ -22,7 +22,7 @@ class TodoService {
     return updatedTodo;
   }
 
-  async delete(id: ObjectId) {
+  async delete(id: string) {
     const deletedTodo = await Todo.findByIdAndDelete(id);
     return deletedTodo;
   }

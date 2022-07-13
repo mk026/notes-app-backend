@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import IUser from '../user/user.interface';
+import { AuthRequest } from '../../middleware/auth.middleware';
 import authService from './auth.service';
 
 class AuthController {
@@ -22,11 +22,7 @@ class AuthController {
     }
   }
 
-  async check(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async check(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const msg = await authService.check(req.user!.id);
       return res.json(msg);

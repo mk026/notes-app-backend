@@ -1,14 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { ObjectId } from 'mongoose';
 
+import { AuthRequest } from '../../middleware/auth.middleware';
 import imageService from './image.service';
 
 class ImageController {
-  async getAll(
-    req: Request & { user?: { id: ObjectId } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async getAll(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const images = await imageService.getAll(req.user!.id);
       return res.json(images);
@@ -17,11 +13,7 @@ class ImageController {
     }
   }
 
-  async create(
-    req: Request & { user?: { id: ObjectId } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async create(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const imageUrl = `/static/images/${req.user?.id}/${req.file?.originalname}`;
       const imageData = {

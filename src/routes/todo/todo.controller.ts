@@ -1,15 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 
-import IUser from '../user/user.interface';
-import ITodo from './todo.interface';
+import { AuthRequest } from '../../middleware/auth.middleware';
 import todoService from './todo.service';
 
 class TodoController {
-  async getAll(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async getAll(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const todos = await todoService.getAll(req.user!.id);
       return res.json(todos);
@@ -18,11 +13,7 @@ class TodoController {
     }
   }
 
-  async create(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async create(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const todoData = { ...req.body, userId: req.user?.id };
       const todo = await todoService.create(todoData);
@@ -42,7 +33,7 @@ class TodoController {
   }
 
   async delete(
-    req: Request<{ id: ITodo['_id'] }>,
+    req: Request<{ id: string }>,
     res: Response,
     next: NextFunction
   ) {

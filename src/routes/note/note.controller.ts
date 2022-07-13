@@ -1,15 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 
-import IUser from '../user/user.interface';
-import INote from './note.interface';
+import { AuthRequest } from '../../middleware/auth.middleware';
 import noteService from './note.service';
 
 class NoteController {
-  async getAll(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async getAll(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const notes = await noteService.getAll(req.user!.id);
       return res.json(notes);
@@ -18,11 +13,7 @@ class NoteController {
     }
   }
 
-  async create(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async create(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const noteData = { ...req.body, userId: req.user?.id };
       const note = await noteService.create(noteData);
@@ -42,7 +33,7 @@ class NoteController {
   }
 
   async delete(
-    req: Request<{ id: INote['_id'] }>,
+    req: Request<{ id: string }>,
     res: Response,
     next: NextFunction
   ) {

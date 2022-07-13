@@ -22,7 +22,7 @@ class NoteService {
     return updatedNote;
   }
 
-  async delete(id: ObjectId) {
+  async delete(id: string) {
     const deletedNote = await Note.findByIdAndDelete(id);
     return deletedNote;
   }

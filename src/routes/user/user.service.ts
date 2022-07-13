@@ -7,7 +7,7 @@ import UpdateUserDto from './dto/update-user.dto';
 import ApiError from '../../exceptions/ApiError';
 
 class UserService {
-  async getOne(id: ObjectId) {
+  async getOne(id: string | ObjectId) {
     const user = await User.findById(id);
     return user;
   }
@@ -52,7 +52,7 @@ class UserService {
     return updatedUser;
   }
 
-  async delete(id: ObjectId) {
+  async delete(id: string) {
     const deletedUser = await User.findByIdAndDelete(id);
     return deletedUser;
   }

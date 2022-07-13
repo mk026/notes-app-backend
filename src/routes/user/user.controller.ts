@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 
-import IUser from './user.interface';
+import { AuthRequest } from '../../middleware/auth.middleware';
 import userService from './user.service';
 
 class UserController {
   async getOne(
-    req: Request<{ id: IUser['_id'] }>,
+    req: Request<{ id: string }>,
     res: Response,
     next: NextFunction
   ) {
@@ -17,11 +17,7 @@ class UserController {
     }
   }
 
-  async update(
-    req: Request & { user?: { id: IUser['_id'] } },
-    res: Response,
-    next: NextFunction
-  ) {
+  async update(req: AuthRequest, res: Response, next: NextFunction) {
     try {
       const user = await userService.update(req.user!.id, req.body);
       return res.json(user);
@@ -31,7 +27,7 @@ class UserController {
   }
 
   async delete(
-    req: Request<{ id: IUser['_id'] }>,
+    req: Request<{ id: string }>,
     res: Response,
     next: NextFunction
   ) {

@@ -1,10 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 import config from '../config/config';
+import { AuthPayload } from '../utils/generateToken';
+
+export interface AuthRequest extends Request {
+  user?: AuthPayload;
+}
 
 export default function authMiddleware<T>(
-  req: Request<T> & { user?: string | JwtPayload },
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ) {
@@ -14,7 +19,7 @@ export default function authMiddleware<T>(
       return res.status(403).json({ message: 'Unauthorized' });
     }
     const secret = config.server.token.secret;
-    const decodedData = jwt.verify(token, secret);
+    const decodedData = jwt.verify(token, secret) as AuthPayload;
     req.user = decodedData;
     next();
   } catch (error) {

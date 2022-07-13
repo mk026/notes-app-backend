@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongoose';
-import CreateImageDto from './dto/create-image.dto';
-import UpdateImageDto from './dto/update-image.dto';
 
 import Image from './image.model';
+import CreateImageDto from './dto/create-image.dto';
+import UpdateImageDto from './dto/update-image.dto';
 
 class ImageService {
   async getAll(userId: ObjectId) {
