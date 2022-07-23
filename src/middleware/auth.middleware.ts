@@ -8,7 +8,7 @@ export interface AuthRequest extends Request {
   user?: AuthPayload;
 }
 
-export default function authMiddleware<T>(
+export default function authMiddleware(
   req: AuthRequest,
   res: Response,
   next: NextFunction
